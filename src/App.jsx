@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { fetchPopularMovies, searchMovies } from "./services/tmdb";
 import MovieCard from "./components/MovieCard";
+import useDebounce from "./hooks/useDebounce";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const debouncedSearch = useDebounce(searchTerm, 500);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -13,10 +16,10 @@ function App() {
 
       let data;
 
-      if (searchTerm.trim() === "") {
+      if (debouncedSearch.trim() === "") {
         data = await fetchPopularMovies();
       } else {
-        data = await searchMovies(searchTerm);
+        data = await searchMovies(debouncedSearch);
       }
 
       setMovies(data);
