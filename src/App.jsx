@@ -1,3 +1,6 @@
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 import { useEffect, useState, useRef } from "react";
 import { fetchPopularMovies, searchMovies } from "./services/tmdb";
 import MovieCard from "./components/MovieCard";
@@ -69,41 +72,26 @@ function App() {
   }, [loadingMore, initialLoading]);
 
   return (
-    <div className="bg-black min-h-screen text-white p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        🎬 CineStream
-      </h1>
 
-      <div className="flex justify-center mb-8">
-        <input
-          type="search"
-          placeholder="Search movies..."
-          className="w-full max-w-md px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-  {/* Initial Big Loader */}
-  {initialLoading && page === 1 && (
-    <p className="text-center mt-10 text-gray-400">
-      Loading movies...
-    </p>
-  )}
-      {/* Grid ALWAYS stays */}
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
 
-      {/* Bottom Loading Indicator */}
-      {loadingMore && (
-    <p className="text-center mt-6 text-gray-400">
-      Loading more movies...
-    </p>
-  )}
+   <div className="bg-black min-h-screen text-white">
+      <nav className="flex justify-between items-center p-6 border-b border-gray-800">
+        <Link to="/" className="text-2xl font-bold">
+          🎬 CineStream
+        </Link>
 
-      <div id="scroll-trigger" className="h-10"></div>
+        <Link
+          to="/favorites"
+          className="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700"
+        >
+          ❤️ My Favorites
+        </Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
     </div>
   );
 }
