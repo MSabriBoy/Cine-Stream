@@ -1,18 +1,23 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchPopularMovies, searchMovies } from "./services/tmdb";
 import MovieCard from "./components/MovieCard";
 
 function App() {
-   const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+  const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadMovies = async () => {
       setLoading(true);
-      const data = searchTerm
-      ? await fetchPopularMovies(searchTerm)
-      :await fetchPopularMovies();
+
+      let data;
+
+      if (searchTerm.trim() === "") {
+        data = await fetchPopularMovies();
+      } else {
+        data = await searchMovies(searchTerm);
+      }
 
       setMovies(data);
       setLoading(false);
@@ -21,13 +26,12 @@ function App() {
     loadMovies();
   }, [searchTerm]);
 
- return (
+  return (
     <div className="bg-black min-h-screen text-white p-6">
-      <h1 className="text-4xl font-bold text-center mb-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">
         🎬 CineStream
       </h1>
 
-      {/* Search Bar */}
       <div className="flex justify-center mb-8">
         <input
           type="text"
