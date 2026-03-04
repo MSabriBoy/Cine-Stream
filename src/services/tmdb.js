@@ -11,14 +11,14 @@ export const fetchPopularMovies = async (page = 1) => {
     const response = await tmdb.get("/movie/popular", {
       params: {
         api_key: API_KEY,
-        page: page,
+        page,
       },
     });
 
-    return response.data.results;
+    return response.data;   
   } catch (error) {
     console.error("Error fetching movies:", error);
-    return [];
+    return null;
   }
 };
 
