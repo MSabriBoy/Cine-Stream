@@ -1,2 +1,3 @@
 1. I created a infinite scrolling, but i am facing a small problem as i am scrolling down my page load more data from the api and jump to the page 1 and then scroll to the bottom of page 2 which is creating th illustion and confusion i want that my data load and my page start scrolling from where i wait for the next data to load. Can you tell me what method i can use here to achieve this solution.
 2. i want to use a search icon for my search bar just like the real site, can you guide me with the procedure? 
+3. write a code for me to get back on home page via pressing Esc button using useEffect and useNavigate. if i am in favourite list and i am searching something then make my searchBar= "" (empty)
