@@ -60,6 +60,6 @@ npm run dev
 ```bash 
 VITE_TMDB_KEY=your_tmdb_api_key
 ```
-2. You can get an API key from:
+2. You can get an API key from: [Visit TMDB](https://www.themoviedb.org/)
 
-[Visit TMDB](https://www.themoviedb.org/)
+
